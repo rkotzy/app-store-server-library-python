@@ -78,19 +78,19 @@ class SignedDataVerifier:
         """
         decoded_dict = self._decode_signed_object(signed_payload)
         decoded_signed_notification = cattrs.structure(decoded_dict, ResponseBodyV2DecodedPayload)
-        bundle_id = None
-        app_apple_id = None
+        # bundle_id = None
+        # app_apple_id = None
         environment = None
         if decoded_signed_notification.data:
-            bundle_id = decoded_signed_notification.data.bundleId
-            app_apple_id = decoded_signed_notification.data.appAppleId
+            # bundle_id = decoded_signed_notification.data.bundleId
+            # app_apple_id = decoded_signed_notification.data.appAppleId
             environment = decoded_signed_notification.data.environment
         elif decoded_signed_notification.summary:
-            bundle_id = decoded_signed_notification.summary.bundleId
-            app_apple_id = decoded_signed_notification.summary.appAppleId
+            # bundle_id = decoded_signed_notification.summary.bundleId
+            # app_apple_id = decoded_signed_notification.summary.appAppleId
             environment = decoded_signed_notification.summary.environment
-        if bundle_id != self._bundle_id or (self._environment == Environment.PRODUCTION and app_apple_id != self._app_apple_id):
-            raise VerificationException(VerificationStatus.INVALID_APP_IDENTIFIER)
+        # if bundle_id != self._bundle_id or (self._environment == Environment.PRODUCTION and app_apple_id != self._app_apple_id):
+        #     raise VerificationException(VerificationStatus.INVALID_APP_IDENTIFIER)
         if environment != self._environment:
             raise VerificationException(VerificationStatus.INVALID_ENVIRONMENT)
         return decoded_signed_notification
