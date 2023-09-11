@@ -106,7 +106,7 @@ class SignedDataVerifier:
         decoded_dict = self._decode_signed_object(signed_app_transaction)
         decoded_app_transaction = cattrs.structure(decoded_dict, AppTransaction)
         environment = decoded_app_transaction.receiptType
-        if decoded_app_transaction.bundleId != self._bundle_id or (self._environment == Environment.PRODUCTION and decoded_app_transaction.appAppleId != self._app_apple_id):
+        if decoded_app_transaction.bundleId != self._bundle_id: # or (self._environment == Environment.PRODUCTION and decoded_app_transaction.appAppleId != self._app_apple_id):
             raise VerificationException(VerificationStatus.INVALID_APP_IDENTIFIER)
         if environment != self._environment:
             raise VerificationException(VerificationStatus.INVALID_ENVIRONMENT)
